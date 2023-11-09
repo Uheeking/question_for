@@ -1,0 +1,14 @@
+{
+  "name": "back",
+  "version": "1.0.0",
+  "description": "무물 backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test dspecified\" && exit 1"
+  },
+  "author": "Uheeking",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from 'axios'
 import Modal from "react-modal";
-import { Button, Form, Input, Select } from "antd";
+import { Button, Form, Input } from "antd";
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
@@ -42,8 +43,22 @@ const ModalCon = (props: any) => {
     form.resetFields();
   };
   const onFill = () => {
-    form.setFieldsValue({ name: "익명" });
+    form.setFieldsValue({ name: "익명", text: "잘 보고 있어요!!" });
   };
+  useEffect(() => {
+    axios
+      .post("http://localhost:3001/api/question")
+      .then((response) => {
+        const data = response.data;
+        console.log(data);
+        
+        // const days = data.map((item: any) => item.day); 
+        // setDay(days); 
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
   return (
     <Modal
       ariaHideApp={false}
@@ -60,31 +75,14 @@ const ModalCon = (props: any) => {
         <Form.Item name="name" label="Name" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
-        <Form.Item
-          name="gender"
-          label="Gender"
-          rules={[{ required: true }]}
-        ></Form.Item>
-        <Form.Item
-          noStyle
-          shouldUpdate={(prevValues, currentValues) =>
-            prevValues.gender !== currentValues.gender
-          }
-        >
-          {({ getFieldValue }) =>
-            getFieldValue("gender") === "other" ? (
-              <Form.Item
-                name="customizeGender"
-                label="Customize Gender"
-                rules={[{ required: true }]}
-              >
-                <Input />
-              </Form.Item>
-            ) : null
-          }
+        <Form.Item name="text" className="border-solid" label="Text" rules={[{ required: true }]}>
+          <textarea style={{border:'1px lightgray solid', width: '240px', borderRadius: '5px', height: '120px', padding: '10px'}} />
+        </Form.Item>
+        <Form.Item name="password" label="Password" rules={[{ required: true }]}>
+          <Input />
         </Form.Item>
         <Form.Item {...tailLayout}>
-          <Button type="primary" htmlType="submit">
+          <Button htmlType="submit" className="bg-blue-300 text-white">
             Submit
           </Button>
           <Button htmlType="button" onClick={onReset}>

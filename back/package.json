@@ -4,11 +4,13 @@
   "description": "무물 backend",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test dspecified\" && exit 1"
+    "test": "echo \"Error: no test dspecified\" && exit 1",
+    "start": "nodemon app.js"
   },
   "author": "Uheeking",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "nodemon": "^3.0.1"
   }
 }

@@ -1,10 +1,26 @@
 "use client";
-import React, { useState } from "react";
-import ModalCon from './modalCon'
+import React, { useEffect, useState } from "react";
+import ModalCon from './modalCon';
+import axios from "axios";
 
 
 export default function Home() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [question, setQuestion] = useState(false);
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/api/question")
+      .then((response) => {
+        const data = response.data;
+        console.log(data);
+        
+        // const days = data.map((item: any) => item.day); 
+        // setDay(days); 
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
   return (
     <div>
       <div className="font-bold text-4xl text-brown-900 dark:text-slate-300 tracking-tighter p-[20px]">

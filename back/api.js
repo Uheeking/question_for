@@ -4,7 +4,7 @@ const router = express.Router();
 
 // Create a new question
 router.post("/question", async (req, res) => {
-  console.log(req.body);
+  console.log('지금 들어온건가',req.body);
   try {
     const question = new QuestionItem(req.body);
     const savedQuestion = await question.save();

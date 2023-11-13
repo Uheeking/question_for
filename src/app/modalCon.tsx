@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios'
+import axios from "axios";
 import Modal from "react-modal";
 import { Button, Form, Input } from "antd";
 const layout = {
@@ -39,26 +39,59 @@ const customModalStyles: ReactModal.Styles = {
 
 const ModalCon = (props: any) => {
   const [form] = Form.useForm();
+  const [name, setName] = useState("");
+  const [text, setText] = useState("");
+  const [password, setPassword] = useState("");
   const onReset = () => {
     form.resetFields();
   };
   const onFill = () => {
     form.setFieldsValue({ name: "익명", text: "잘 보고 있어요!!" });
   };
-  useEffect(() => {
-    axios
-      .post("http://localhost:3001/api/question")
-      .then((response) => {
-        const data = response.data;
-        console.log(data);
-        
-        // const days = data.map((item: any) => item.day); 
-        // setDay(days); 
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, []);
+  const handleAddQuestion = async () => {
+    console.log(name, text, password);
+
+    if (name) {
+      console.log(name, text, password);
+      try {
+        const response = await axios.post(
+          "http://localhost:3001/api/question",
+          {
+            name: name,
+            text: text,
+            password: password,
+          }
+        );
+
+        if (response.status === 200) {
+          props.setQuestion([...props.question, response.data]);
+          console.log(props.question);
+          
+          setName("");
+          setText("");
+          setPassword("");
+          props.setModalIsOpen(false);
+        }
+      } catch (error: any) {
+        console.error("Error adding a To-Do item:", error);
+        window.prompt("추가 실패: " + error.message);
+      }
+    }
+  };
+  // useEffect(() => {
+  //   axios
+  //     .post("http://localhost:3001/api/question")
+  //     .then((response) => {
+  //       const data = response.data;
+  //       console.log(data);
+
+  //       // const days = data.map((item: any) => item.day);
+  //       // setDay(days);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching data:", error);
+  //     });
+  // }, []);
   return (
     <Modal
       ariaHideApp={false}
@@ -73,16 +106,51 @@ const ModalCon = (props: any) => {
         style={{ maxWidth: 600 }}
       >
         <Form.Item name="name" label="Name" rules={[{ required: true }]}>
-          <Input />
+          <Input
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+          />
         </Form.Item>
-        <Form.Item name="text" className="border-solid" label="Text" rules={[{ required: true }]}>
-          <textarea style={{border:'1px lightgray solid', width: '240px', borderRadius: '5px', height: '120px', padding: '10px'}} />
+        <Form.Item
+          name="text"
+          className="border-solid"
+          label="Text"
+          rules={[{ required: true }]}
+        >
+          <textarea
+            value={text}
+            onChange={(e) => {
+              setText(e.target.value);
+            }}
+            style={{
+              border: "1px lightgray solid",
+              width: "240px",
+              borderRadius: "5px",
+              height: "120px",
+              padding: "10px",
+            }}
+          />
         </Form.Item>
-        <Form.Item name="password" label="Password" rules={[{ required: true }]}>
-          <Input />
+        <Form.Item
+          name="password"
+          label="Password"
+          rules={[{ required: true }]}
+        >
+          <Input
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
         </Form.Item>
         <Form.Item {...tailLayout}>
-          <Button htmlType="submit" className="bg-blue-300 text-white">
+          <Button
+            htmlType="submit"
+            onClick={handleAddQuestion}
+            className="bg-blue-300 text-white"
+          >
             Submit
           </Button>
           <Button htmlType="button" onClick={onReset}>

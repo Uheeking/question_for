@@ -4,7 +4,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 require("dotenv").config();
-
+app.use(bodyParser.json());
 app.use(cors());
 const PORT = process.env.PORT;
 app.set("port", process.env.PORT || 3000);
@@ -20,7 +20,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => console.log("connect to database"));
-app.use(bodyParser.json());
+
 
 app.listen(PORT, () => {
   console.log(PORT, "번 포트에서 대기 중");

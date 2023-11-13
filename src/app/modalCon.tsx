@@ -47,6 +47,8 @@ const ModalCon = (props: any) => {
   };
   const onFill = () => {
     form.setFieldsValue({ name: "익명", text: "잘 보고 있어요!!" });
+    setName("익명");
+    setText("잘 보고 있어요!!");
   };
   const handleAddQuestion = async () => {
     console.log(name, text, password);

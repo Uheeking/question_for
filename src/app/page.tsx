@@ -28,8 +28,10 @@ export default function Home() {
         const answer = window.prompt("답변을 적어주세요.");
         await axios.post(`${URL}/${id}`, { answer })
         .then(response => {
-            setQuestion([...question, response.data]);
+          window.location.replace("/")
   })
+      }else{
+        window.alert("유희왕님이 아니시네요.")
       }
     }catch(error:any){
 
@@ -104,7 +106,7 @@ export default function Home() {
             <p className="text-white">{question.text}</p>
             <p className="text-white">{question.answer ? <p>-> {question.answer}</p> : ""}</p>
             <p className="text-green-400">
-              삭제하시겠습니까?{" "}
+              $ 삭제하시겠습니까?{" "}
               <button onClick={() => deleteQuestion(question._id)}>Yes</button> or No
             </p>
           </div>

@@ -78,20 +78,6 @@ const ModalCon = (props: any) => {
       }
     }
   };
-  // useEffect(() => {
-  //   axios
-  //     .post("http://localhost:3001/api/question")
-  //     .then((response) => {
-  //       const data = response.data;
-  //       console.log(data);
-
-  //       // const days = data.map((item: any) => item.day);
-  //       // setDay(days);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error fetching data:", error);
-  //     });
-  // }, []);
   return (
     <Modal
       ariaHideApp={false}

@@ -11,6 +11,9 @@ const questionSchema = new mongoose.Schema({
     password: {
         type: String,
         require: [true, "User must type password"],
+    },
+    answer: {
+        type: String,
     }
 });
 module.exports = mongoose.model('Question', questionSchema);

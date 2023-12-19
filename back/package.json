@@ -4,13 +4,17 @@
   "description": "무물 backend",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test dspecified\" && exit 1",
+    "test": "cross-env NODE_ENV=test jest",
+    "testing": "nodemon tests/products.test.js",
     "start": "nodemon app.js"
   },
   "author": "Uheeking",
   "license": "ISC",
   "dependencies": {
+    "cross-env": "^7.0.3",
     "express": "^4.18.2",
-    "nodemon": "^3.0.1"
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.1",
+    "supertest": "^6.3.3"
   }
 }

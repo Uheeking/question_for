@@ -24,6 +24,15 @@ router.get("/question", async (req, res) => {
   }
 });
 
+router.get("/question/:id", async (req, res) => {
+  try {
+    const question = await QuestionItem.find();
+    res.json(question);
+  } catch (err) {
+    res.status(500).json({ error: "Could not retrieve question." });
+  }
+});
+
 // Add a question item
 router.post("/question/:id", async (req, res) => {
   try {

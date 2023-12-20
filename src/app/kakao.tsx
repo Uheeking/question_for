@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import KakaoImage from "../../public/kakao_login_medium_narrow.png";
 

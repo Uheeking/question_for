@@ -1,5 +1,6 @@
 const express = require("express");
 const session = require("express-session");
+const MemoryStore = require('memorystore')(session);
 const QuestionItem = require("./Models/question");
 const UserItem = require("./Models/user");
 const router = express.Router();
@@ -7,11 +8,16 @@ const axios = require("axios");
 const qs = require("qs");
 require("dotenv").config();
 
+const maxAge = 1000 * 60 * 60;
 router.use(
   session({
     secret: process.env.SERCETKEY, // Replace with a strong secret
     resave: false,
     saveUninitialized: true,
+    store: new MemoryStore({ checkPeriod: maxAge }),
+    cookie: {
+      maxAge,
+    },
   })
 );
 
@@ -62,35 +68,23 @@ router.get("/oauth/callback/kakao", async (req, res) => {
         Authorization: `Bearer ${token.data.access_token}`,
       },
     });
-    console.log("data::", user.data);
 
-    const {
-      id,
-      kakao_account: {
-        profile: { nickname },
-      },
-    } = user.data;
-
+    const {id, kakao_account: { profile: { nickname },}, } = user.data;
     const existingUser = await UserItem.findOne({ _id: id });
 
-    if (existingUser) {
-      req.session.userId = existingUser.id;
-      req.session.save(() => {});
-    } else {
+    if (!existingUser) {
       const userItem = new UserItem({
         _id: id,
         name: nickname,
       });
-      const savedUser = await userItem.save();
-      res.json(savedUser);
+      await userItem.save();
     }
-
     req.session.userData = {
       _id: id,
       name: nickname,
     };
 
-    return res.redirect("http://localhost:3000");
+    return res.redirect("http://localhost:3000?id="+nickname);
   } catch (error) {
     console.error("Error in Kakao OAuth callback:", error.message);
     res.status(500).json({ error: "Internal Server Error" });
@@ -127,6 +121,17 @@ router.post("/question/:id", async (req, res) => {
 router.delete("/question/:id", async (req, res) => {
   await QuestionItem.deleteOne({ _id: req.params.id });
   res.json({ message: "question deleted." });
+});
+
+router.get("/check-session", (req, res) => {
+  console.log('백엔드 돌아가는 중');
+  console.log(req.session.userData);
+  
+  if (req.session.userData) {
+    res.json({ authenticated: true, userId: req.session.userData });
+  } else {
+    res.json({ authenticated: false });
+  }
 });
 
 module.exports = router;

@@ -84,9 +84,21 @@ router.get("/oauth/callback/kakao", async (req, res) => {
       name: nickname,
     };
 
-    return res.redirect("http://localhost:3000?id="+nickname);
+    return res.redirect("http://localhost:3000/?id="+nickname,);
   } catch (error) {
     console.error("Error in Kakao OAuth callback:", error.message);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+router.get("/deleteUser", async (req, res) => {
+  try {
+    req.session.destroy(() => {
+      req.session;
+    });
+    res.status(200).json({ message: "로그아웃 되었습니다. " });
+  } catch (error) {
+    console.error("Error in Delete User :", error.message);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });

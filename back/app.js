@@ -5,7 +5,21 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 require("dotenv").config();
 app.use(bodyParser.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      const allowedOrigins = ["http://localhost:3000"]; // Add other allowed origins if needed
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+    optionsSuccessStatus: 200,
+  })
+);
+
 const PORT = process.env.PORT;
 app.set("port", process.env.PORT || 3000);
 

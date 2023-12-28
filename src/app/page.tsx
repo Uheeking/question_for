@@ -5,13 +5,14 @@ import Terms from "./terms";
 import axios from "axios";
 import { BiPointer } from "react-icons/bi";
 import Kakao from './kakao'
+import { useSearchParams } from 'next/navigation'
 require("dotenv").config();
 
 export default function Home() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [question, setQuestion] = useState([]);
-  const queryString = location.search;
-  const encodedId = queryString ? decodeURIComponent(queryString.split('=')[1]) : null;
+  const searchParams = useSearchParams()
+  const search = searchParams.get('id')
   const deleteUser = async () => {
     try {
       const response = await axios.get(
@@ -30,9 +31,9 @@ export default function Home() {
         <div className="font-bold text-4xl text-brown-900 dark:text-slate-300 tracking-tighter pl-[20px] pt-[20px]">
           Uheeking
         </div>
-        {encodedId ? (
+        {search ? (
           <div className="flex">
-            <div className="font-bold text-2xl pt-[25px] pr-[10px]">{encodedId}님</div>
+            <div className="font-bold text-2xl pt-[25px] pr-[10px]">{search}님</div>
             <button onClick={deleteUser} className="mt-[20px] mr-[20px] bg-green-400 text-white rounded-md p-[10px]">로그아웃</button>
           </div>
         ) : (

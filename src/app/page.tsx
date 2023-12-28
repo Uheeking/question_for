@@ -9,13 +9,18 @@ require("dotenv").config();
 export default function Home() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [question, setQuestion] = useState([]);
+  const queryString = location.search;
+  const encodedId = queryString ? decodeURIComponent(queryString.split('=')[1]) : null;
   return (
+    // Improve below code
     <div>
       <div className="flex space-x-2 justify-between">
         <div className="font-bold text-4xl text-brown-900 dark:text-slate-300 tracking-tighter p-[20px]">
           Uheeking
         </div>
-        <Kakao />
+        <div className="p-[10px] black bg-white">{encodedId}</div>
+        {encodedId ? encodedId : <Kakao />}
+        
       </div>
       <div className="justify-center w-[200px] m-auto">
         <div className="w-full flex-col">
@@ -38,7 +43,6 @@ export default function Home() {
           질문하기
           <BiPointer />
         </button>
-
         <ModalCon
           modalIsOpen={modalIsOpen}
           setModalIsOpen={setModalIsOpen}

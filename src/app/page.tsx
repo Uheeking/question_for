@@ -6,6 +6,7 @@ import axios from "axios";
 import { BiPointer } from "react-icons/bi";
 import Kakao from './kakao'
 import { useSearchParams } from 'next/navigation'
+import toast, { Toaster } from 'react-hot-toast';
 require("dotenv").config();
 
 export default function Home() {
@@ -19,14 +20,19 @@ export default function Home() {
         "http://localhost:3001/api/deleteUser",
       );
       if(response.data.message){
-        window.location.replace("/")
+        toast.success('로그아웃이 되었습니다. ');
+      setTimeout(() => {
+        window.location.replace("/");
+      }, 1000);
       }
     } catch (error: any) {
       console.error("Error adding a To-Do item:", error);
+      toast.error('로그아웃이 되지 않았습니다. ');
     }
   }
   return (
     <div>
+      <Toaster/>
       <div className="flex space-x-2 justify-between">
         <div className="font-bold text-4xl text-brown-900 dark:text-slate-300 tracking-tighter pl-[20px] pt-[20px]">
           Uheeking

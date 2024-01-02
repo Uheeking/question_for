@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
 import axios from "axios";
+import Like from './like'
 require("dotenv").config();
 const URL = process.env.NEXT_PUBLIC_BACKURL;
 
@@ -41,8 +42,8 @@ export default function Terms(props: any) {
       const confirmed = window.confirm("정말로 삭제하시겠습니까?");
       if (confirmed) {
         await axios.delete(`${URL}/${id}`);
-        props.setQuestion((prevquestion) =>
-          prevquestion.filter((proque) => proque._id !== id)
+        props.setQuestion((prevquestion :any) =>
+          prevquestion.filter((proque :any) => proque._id !== id)
         );
         window.alert("삭제되었습니다.");
       } else {
@@ -61,16 +62,18 @@ export default function Terms(props: any) {
         >
           <div className="flex justify-between items-center">
             <div className="flex space-x-2 text-red-500">
-              <div className="w-3 h-3 rounded-full bg-red-500" />
-              <div className="w-3 h-3 rounded-full bg-yellow-500" />
+              <button>
+              <div className="w-3 h-3 rounded-full bg-red-500" /></button>
+              <button><div className="w-3 h-3 rounded-full bg-yellow-500" /></button>
               <button onClick={()=>addAnswer(question._id)}><div className="w-3 h-3 rounded-full bg-green-500" /></button>
+              <Like />
             </div>
             <p className="text-sm">bash</p>
           </div>
-          <div className="mt-4">
-            <p className="text-green-400">$ {question.name}</p>
+          <div className="mt-2">
+            <div className="flex"><p className="text-green-400">$ {question.name} </p></div>
             <p className="text-white">{question.text}</p>
-            <p className="text-white">{question.answer ? <p>-> {question.answer}</p> : ""}</p>
+            <p className="text-white">{question.answer ? <p>-{">"} {question.answer}</p> : ""}</p>
             <p className="text-green-400">
               $ 삭제하시겠습니까?{" "}
               <button onClick={() => deleteQuestion(question._id)}>Yes</button> or No

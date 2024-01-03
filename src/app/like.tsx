@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import clsx from "clsx";
 import axios from "axios";
 require("dotenv").config();
@@ -17,8 +17,8 @@ function like(props: any) {
     try {
       console.log("토글 돌아가는 중");
       console.log(isLiked, runningFetchCount);
-      setOptimisticIsLiked((optimisticIsLiked: any) => !optimisticIsLiked); //true
-      setRunningFetchCount((runningFetchCount) => runningFetchCount + 1); //1
+      setOptimisticIsLiked((optimisticIsLiked: any) => !optimisticIsLiked); 
+      setRunningFetchCount((runningFetchCount) => runningFetchCount + 1); 
       const response = await axios.post(`${URL}/like/${id}`, {
         isLiked: !isLiked,
       });
@@ -26,11 +26,18 @@ function like(props: any) {
         console.log(response.data);
       }
       setIsLiked(!isLiked);
-      setRunningFetchCount((runningFetchCount) => runningFetchCount - 1); //0
+      setRunningFetchCount((runningFetchCount) => runningFetchCount - 1); 
     } catch (error: any) {
       console.error("Error creating data:", error);
     }
   };
+
+  useEffect(() => {
+    if (runningFetchCount === 0) {
+      setOptimisticIsLiked(isLiked);
+    }
+  }, [runningFetchCount, isLiked]);
+  
   return (
     <div>
       <button

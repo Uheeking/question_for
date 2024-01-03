@@ -158,6 +158,7 @@ router.post("/like/:id", async (req, res) => {
 
     if (existingLike) {
       await LikeItem.deleteOne({ _id: id });
+      console.log('삭제되었습니다. ');
       res.json({ _id: id, like: isLiked, message: "LikeItem deleted successfully." });
     }else{
       const newLike = new LikeItem({ _id: id, like: isLiked });

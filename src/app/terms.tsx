@@ -85,7 +85,7 @@ export default function Terms(props: any) {
                 <div className="w-3 h-3 rounded-full bg-green-500" />
               </button>
               <Like
-                isLiked={like.some((likes:any) => likes._id === question._id)}
+                isLiked={like.some((likes: any) => likes._id == question._id)}
                 id={question._id}
               />
             </div>

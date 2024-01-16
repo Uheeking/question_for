@@ -7,6 +7,7 @@ import { BiPointer } from "react-icons/bi";
 import Kakao from "./kakao";
 import toast from "react-hot-toast";
 import ScrollToTop from "./ScrollToTop";
+import GPTSolution from "../pages/chatgpt/GPTSolution";
 import Link from "next/link";
 require("dotenv").config();
 
@@ -63,10 +64,9 @@ export default function Home() {
             <span className="bg-black text-white text-xl">Uheeking</span>
           </div>
           <div className="text-center">
-            <Link href="/chatgpt">ask for chat GPT</Link>
+            <Link href="/chatgpt/GPTSolution">ask for chat GPT</Link>
           </div>
         </div>
-
         <button
           onClick={() => setModalIsOpen(true)}
           className="flex ml-3 font-bold text-4xl text-brown-900 dark:text-slate-300 tracking-tighter p-1"

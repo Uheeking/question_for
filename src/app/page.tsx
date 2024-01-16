@@ -6,6 +6,7 @@ import axios from "axios";
 import { BiPointer } from "react-icons/bi";
 import Kakao from "./kakao";
 import toast from "react-hot-toast";
+import ScrollToTop from "./ScrollToTop";
 require("dotenv").config();
 
 export default function Home() {
@@ -76,6 +77,7 @@ export default function Home() {
         />
       </div>
       <Terms question={question} setQuestion={setQuestion} />
+      <ScrollToTop />
     </div>
   );
 }

@@ -1,46 +1,47 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ModalCon from "./modalCon";
 import Terms from "./terms";
 import axios from "axios";
 import { BiPointer } from "react-icons/bi";
-import Kakao from './kakao'
-import { useSearchParams } from 'next/navigation'
-import toast, { Toaster } from 'react-hot-toast';
+import Kakao from "./kakao";
+import toast from "react-hot-toast";
 require("dotenv").config();
 
 export default function Home() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [question, setQuestion] = useState([]);
-  const searchParams = useSearchParams()
-  const search = searchParams.get('id')
+  const Id = localStorage.getItem("id");
   const deleteUser = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:3001/api/deleteUser",
-      );
-      if(response.data.message){
-        toast.success('로그아웃이 되었습니다. ');
-      setTimeout(() => {
-        window.location.replace("/");
-      }, 1000);
+      const response = await axios.get("http://localhost:3001/api/deleteUser");
+      if (response.data.message) {
+        toast.success("로그아웃이 되었습니다. ");
+        localStorage.removeItem("id");
+        setTimeout(() => {
+          window.location.replace("/");
+        }, 1000);
       }
     } catch (error: any) {
       console.error("Error adding a To-Do item:", error);
-      toast.error('로그아웃이 되지 않았습니다. ');
+      toast.error("로그아웃이 되지 않았습니다. ");
     }
-  }
+  };
   return (
     <div>
-      <Toaster/>
       <div className="flex space-x-2 justify-between">
         <div className="font-bold text-4xl text-brown-900 dark:text-slate-300 tracking-tighter pl-[20px] pt-[20px]">
           Uheeking
         </div>
-        {search ? (
+        {Id ? (
           <div className="flex">
-            <div className="font-bold text-2xl pt-[25px] pr-[10px]">{search}님</div>
-            <button onClick={deleteUser} className="mt-[20px] mr-[20px] bg-green-400 text-white rounded-md p-[10px]">로그아웃</button>
+            <div className="font-bold text-2xl pt-[25px] pr-[10px]">{Id}님</div>
+            <button
+              onClick={deleteUser}
+              className="mt-[20px] mr-[20px] bg-green-400 text-white rounded-md p-[10px]"
+            >
+              로그아웃
+            </button>
           </div>
         ) : (
           <Kakao />

@@ -2,12 +2,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Like from "./like";
+import { FixedSizeList as List } from "react-window";
 require("dotenv").config();
 const URL = process.env.NEXT_PUBLIC_BACKURL;
 
 export default function Terms(props: any) {
   const proque = props.question;
-  const [like, setLike] = useState([])
+  const [like, setLike] = useState([]);
 
   useEffect(() => {
     axios
@@ -21,7 +22,7 @@ export default function Terms(props: any) {
         console.error("Error fetching data:", error);
       });
 
-      axios
+    axios
       .get(`${URL}/like`)
       .then((response) => {
         const data = response.data;
@@ -67,48 +68,57 @@ export default function Terms(props: any) {
   };
 
   return (
-    <>
-      {proque.map((question: any, i: any) => (
-        <aside
-          key={i}
-          className="m-auto bg-black text-white p-6 mt-5 rounded-lg w-full max-w-lg font-mono text-xl"
-        >
-          <div className="flex justify-between items-center">
-            <div className="flex space-x-2 text-red-500">
-              <button>
-                <div className="w-3 h-3 rounded-full bg-red-500" />
-              </button>
-              <button>
-                <div className="w-3 h-3 rounded-full bg-yellow-500" />
-              </button>
-              <button onClick={() => addAnswer(question._id)}>
-                <div className="w-3 h-3 rounded-full bg-green-500" />
-              </button>
-              <Like
-                isLiked={like.some((likes: any) => likes._id == question._id)}
-                id={question._id}
-              />
+    <div className="w-3/5 h-190vh m-auto">
+      <List height={1500} itemCount={proque.length} itemSize={250} width="100%">
+        {({ index, style }) => {
+          const currentQuestion = proque[index];
+
+          return (
+            <div style={style} className="">
+              <aside className="m-auto bg-black text-white p-6 mt-5 rounded-lg w-full max-w-lg font-mono text-xl">
+                <div className="flex justify-between items-center">
+                  <div className="flex space-x-2 text-red-500">
+                    <button>
+                      <div className="w-3 h-3 rounded-full bg-red-500" />
+                    </button>
+                    <button>
+                      <div className="w-3 h-3 rounded-full bg-yellow-500" />
+                    </button>
+                    <button onClick={() => addAnswer(currentQuestion._id)}>
+                      <div className="w-3 h-3 rounded-full bg-green-500" />
+                    </button>
+                    <Like
+                      isLiked={like.some(
+                        (likes: any) => likes._id === currentQuestion._id
+                      )}
+                      id={currentQuestion._id}
+                    />
+                  </div>
+                  <p className="text-sm">bash</p>
+                </div>
+                <div className="mt-2">
+                  <div className="flex">
+                    <p className="text-green-400">$ {currentQuestion.name} </p>
+                  </div>
+                  <p className="text-white">{currentQuestion.text}</p>
+                  {currentQuestion.answer && (
+                    <p>
+                      -{">"} {currentQuestion.answer}
+                    </p>
+                  )}
+                  <p className="text-green-400">
+                    $ 삭제하시겠습니까?{" "}
+                    <button onClick={() => deleteQuestion(currentQuestion._id)}>
+                      Yes
+                    </button>{" "}
+                    or No
+                  </p>
+                </div>
+              </aside>
             </div>
-            <p className="text-sm">bash</p>
-          </div>
-          <div className="mt-2">
-            <div className="flex">
-              <p className="text-green-400">$ {question.name} </p>
-            </div>
-            <p className="text-white">{question.text}</p>
-            {question.answer && (
-              <p>
-                -{">"} {question.answer}
-              </p>
-            )}
-            <p className="text-green-400">
-              $ 삭제하시겠습니까?{" "}
-              <button onClick={() => deleteQuestion(question._id)}>Yes</button>{" "}
-              or No
-            </p>
-          </div>
-        </aside>
-      ))}
-    </>
+          );
+        }}
+      </List>
+    </div>
   );
 }

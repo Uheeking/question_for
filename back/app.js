@@ -27,14 +27,12 @@ app.get("/", (req, res) => {
   res.send("Hello, Express");
 });
 app.use("/api", require("./api"));
-
 mongoose
   .connect(process.env.DB, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
   .then(() => console.log("connect to database"));
-
 
 app.listen(PORT, () => {
   console.log(PORT, "번 포트에서 대기 중");

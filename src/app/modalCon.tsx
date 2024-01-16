@@ -68,7 +68,7 @@ const ModalCon = (props: any) => {
         if (response.status === 200) {
           props.setQuestion([...props.question, response.data]);
           console.log(props.question);
-          
+
           setName("");
           setText("");
           setPassword("");

@@ -43,7 +43,17 @@ function App() {
     <AppConatiner>
       {contextHolder}
       <AppTitle>GPT, 고민을 들어줘</AppTitle>
-
+      <div className="m-[10px]">
+        <Typewriter
+          words={[keyword]}
+          loop={5}
+          cursor
+          cursorStyle="|"
+          typeSpeed={120}
+          deleteSpeed={50}
+          delaySpeed={1000}
+        />
+      </div>
       <DiaryInput
         messageApi={messageApi}
         isLoading={isLoading}

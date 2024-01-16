@@ -7,14 +7,13 @@ import { BiPointer } from "react-icons/bi";
 import Kakao from "./kakao";
 import toast from "react-hot-toast";
 import ScrollToTop from "./ScrollToTop";
-import GPTSolution from "../pages/chatgpt/GPTSolution";
 import Link from "next/link";
 require("dotenv").config();
 
 export default function Home() {
+  const Id = localStorage.getItem("id");
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [question, setQuestion] = useState([]);
-  const Id = localStorage.getItem("id");
   const deleteUser = async () => {
     try {
       const response = await axios.get("http://localhost:3001/api/deleteUser");
@@ -30,6 +29,7 @@ export default function Home() {
       toast.error("로그아웃이 되지 않았습니다. ");
     }
   };
+
   return (
     <div>
       <div className="flex space-x-2 justify-between">

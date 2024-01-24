@@ -6,7 +6,8 @@
   "scripts": {
     "test": "cross-env NODE_ENV=test jest",
     "testing": "nodemon tests/products.test.js",
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "swr": "node swagger.js"
   },
   "author": "Uheeking",
   "license": "ISC",
@@ -19,6 +20,9 @@
     "memorystore": "^1.6.7",
     "nodemon": "^3.0.1",
     "qs": "^6.11.2",
-    "supertest": "^6.3.3"
+    "supertest": "^6.3.3",
+    "swagger-autogen": "^2.23.7",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0"
   }
 }

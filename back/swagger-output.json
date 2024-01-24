@@ -1,0 +1,201 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Uheeking 무물",
+    "description": "Uheeking에게 궁금한 것을 물어보세요!",
+    "version": "1.0.0"
+  },
+  "host": "http://localhost:3000",
+  "basePath": "/",
+  "schemes": ["http"],
+  "paths": {
+    "/question": {
+      "post": {
+        "tags": ["Question API"],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "성공"
+          },
+          "500": {
+            "description": "내부 서버 오류"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Question API"],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "성공"
+          },
+          "500": {
+            "description": "내부 서버 오류"
+          }
+        }
+      }
+    },
+    "/oauth/callback/kakao": {
+      "get": {
+        "tags": ["Oauth API"],
+        "description": "",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "내부 서버 오류"
+          }
+        }
+      }
+    },
+    "/deleteUser": {
+      "get": {
+        "tags": ["Oauth API"],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "성공"
+          },
+          "500": {
+            "description": "내부 서버 오류"
+          }
+        }
+      }
+    },
+    "/question/{id}": {
+      "get": {
+        "tags": ["Question API"],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "성공"
+          },
+          "500": {
+            "description": "내부 서버 오류"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Question API"],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "answer": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "성공"
+          },
+          "500": {
+            "description": "내부 서버 오류"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Question API"],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "성공"
+          }
+        }
+      }
+    },
+    "/check-session": {
+      "get": {
+        "tags": ["Oauth API"],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "성공"
+          }
+        }
+      }
+    },
+    "/like/{id}": {
+      "post": {
+        "tags": ["Like API"],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "isLiked": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "성공"
+          },
+          "500": {
+            "description": "내부 서버 오류"
+          }
+        }
+      }
+    },
+    "/like": {
+      "get": {
+        "tags": ["Like API"],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "성공"
+          },
+          "500": {
+            "description": "내부 서버 오류"
+          }
+        }
+      }
+    }
+  }
+}

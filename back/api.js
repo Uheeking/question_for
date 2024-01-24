@@ -1,6 +1,6 @@
 const express = require("express");
 const session = require("express-session");
-const MemoryStore = require('memorystore')(session);
+const MemoryStore = require("memorystore")(session);
 const QuestionItem = require("./Models/question");
 const UserItem = require("./Models/user");
 const LikeItem = require("./Models/like");
@@ -70,7 +70,12 @@ router.get("/oauth/callback/kakao", async (req, res) => {
       },
     });
 
-    const {id, kakao_account: { profile: { nickname },}, } = user.data;
+    const {
+      id,
+      kakao_account: {
+        profile: { nickname },
+      },
+    } = user.data;
     const existingUser = await UserItem.findOne({ _id: id });
 
     if (!existingUser) {
@@ -85,7 +90,7 @@ router.get("/oauth/callback/kakao", async (req, res) => {
       name: nickname,
     };
 
-    return res.redirect("http://localhost:3000/?id="+nickname,);
+    return res.redirect("http://localhost:3000/?id=" + nickname);
   } catch (error) {
     console.error("Error in Kakao OAuth callback:", error.message);
     res.status(500).json({ error: "Internal Server Error" });
@@ -137,9 +142,9 @@ router.delete("/question/:id", async (req, res) => {
 });
 
 router.get("/check-session", (req, res) => {
-  console.log('백엔드 돌아가는 중');
+  console.log("백엔드 돌아가는 중");
   console.log(req.session.userData);
-  
+
   if (req.session.userData) {
     res.json({ authenticated: true, userId: req.session.userData });
   } else {
@@ -149,8 +154,8 @@ router.get("/check-session", (req, res) => {
 
 router.post("/like/:id", async (req, res) => {
   try {
-    console.log('백엔드 돌아가는 중');
-    
+    console.log("백엔드 돌아가는 중");
+
     const { id } = req.params;
     const { isLiked } = req.body;
     console.log(id, isLiked);
@@ -158,9 +163,13 @@ router.post("/like/:id", async (req, res) => {
 
     if (existingLike) {
       await LikeItem.deleteOne({ _id: id });
-      console.log('삭제되었습니다. ');
-      res.json({ _id: id, like: isLiked, message: "LikeItem deleted successfully." });
-    }else{
+      console.log("삭제되었습니다. ");
+      res.json({
+        _id: id,
+        like: isLiked,
+        message: "LikeItem deleted successfully.",
+      });
+    } else {
       const newLike = new LikeItem({ _id: id, like: isLiked });
       const savedLike = await newLike.save();
       console.log(newLike);
@@ -172,13 +181,13 @@ router.post("/like/:id", async (req, res) => {
   }
 });
 
-router.get("/like", async (req, res)=> {
+router.get("/like", async (req, res) => {
   try {
     const like = await LikeItem.find();
     res.json(like);
   } catch (err) {
     res.status(500).json({ error: "Could not retrieve like." });
   }
-})
+});
 
 module.exports = router;

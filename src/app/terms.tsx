@@ -74,7 +74,7 @@ export default function Terms(props: any) {
           const currentQuestion = proque[index];
 
           return (
-            <div style={style} className="">
+            <div style={style}>
               <aside className="m-auto bg-black text-white p-6 mt-5 rounded-lg w-full max-w-lg font-mono text-xl">
                 <div className="flex justify-between items-center">
                   <div className="flex space-x-2 text-red-500">

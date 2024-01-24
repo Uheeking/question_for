@@ -3,7 +3,9 @@ const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-require("dotenv").config();
+const swaggerFile = require("./swagger-output.json");
+const swaggerUi = require("swagger-ui-express");
+https: require("dotenv").config();
 app.use(bodyParser.json());
 app.use(
   cors({
@@ -27,7 +29,12 @@ app.get("/", (req, res) => {
   res.send("Hello, Express");
 });
 app.use("/api", require("./api"));
-mongoose
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerFile, { explorer: true })
+);
+https: mongoose
   .connect(process.env.DB, {
     useNewUrlParser: true,
     useUnifiedTopology: true,

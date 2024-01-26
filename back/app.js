@@ -3,7 +3,7 @@ const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const swaggerFile = require("./swagger-output.json");
+const swaggerFile = require("./swaggerFile/swagger-output.json");
 const swaggerUi = require("swagger-ui-express");
 https: require("dotenv").config();
 app.use(bodyParser.json());
@@ -28,7 +28,7 @@ app.set("port", process.env.PORT || 3000);
 app.get("/", (req, res) => {
   res.send("Hello, Express");
 });
-app.use("/api", require("./api"));
+app.use("/api", require("./api/question"));
 app.use(
   "/api-docs",
   swaggerUi.serve,

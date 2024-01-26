@@ -1,0 +1,212 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Uheeking 무물",
+    "description": "Uheeking에게 궁금한 것을 물어보세요!",
+    "version": "1.0.0"
+  },
+  "host": "http://localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/like/{id}": {
+      "post": {
+        "tags": [
+          "Like API"
+        ],
+        "summary": "id별 like하기",
+        "description": "id별로 좋아요, 삭제합니다. ",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "isLiked": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "성공"
+          },
+          "500": {
+            "description": "내부 서버 오류"
+          }
+        }
+      }
+    },
+    "/like": {
+      "get": {
+        "tags": [
+          "Like API"
+        ],
+        "summary": "like 정보보기",
+        "description": "like를 한 유저의 정보를 가져옵니다. ",
+        "responses": {
+          "200": {
+            "description": "성공"
+          },
+          "500": {
+            "description": "내부 서버 오류"
+          }
+        }
+      }
+    },
+    "/oauth/callback/kakao": {
+      "get": {
+        "tags": [
+          "Oauth API"
+        ],
+        "summary": "Kakao API 등록하기",
+        "description": "kakao에 로그인하기입니다. ",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "내부 서버 오류"
+          }
+        }
+      }
+    },
+    "/deleteUser": {
+      "get": {
+        "tags": [
+          "Oauth API"
+        ],
+        "summary": "kakao 유저 삭제하기",
+        "description": "kakao로 로그인을 한 유저를 삭제합니다. ",
+        "responses": {
+          "200": {
+            "description": "성공"
+          },
+          "500": {
+            "description": "내부 서버 오류"
+          }
+        }
+      }
+    },
+    "/check-session": {
+      "get": {
+        "tags": [
+          "Oauth API"
+        ],
+        "summary": "session 정보보기",
+        "description": "session에 등록된 정보를 봅니다. ",
+        "responses": {
+          "200": {
+            "description": "성공"
+          }
+        }
+      }
+    },
+    "/question": {
+      "post": {
+        "tags": [
+          "Question API"
+        ],
+        "summary": "질문 등록하기",
+        "description": "Uheeking에 대한 질문 등록하기입니다. ",
+        "responses": {
+          "200": {
+            "description": "성공"
+          },
+          "500": {
+            "description": "내부 서버 오류"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Question API"
+        ],
+        "summary": "질문 가져오기",
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/question/{id}": {
+      "get": {
+        "tags": [
+          "Question API"
+        ],
+        "summary": "id별 질문 가져오기",
+        "description": "Uheeking에 대한 질문을 삭제합니다.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "성공"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Question API"
+        ],
+        "summary": "id별 질문 가져오기",
+        "description": "Uheeking에 대한 질문을 삭제합니다.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "성공"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Question API"
+        ],
+        "summary": "질문 삭제하기",
+        "description": "Uheeking에 대한 질문을 삭제합니다.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "성공"
+          }
+        }
+      }
+    }
+  }
+}

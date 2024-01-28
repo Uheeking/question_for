@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Like from "./like";
+import toast from "react-hot-toast";
 import { FixedSizeList as List } from "react-window";
 require("dotenv").config();
 const URL = process.env.NEXT_PUBLIC_BACKURL;
@@ -12,7 +13,7 @@ export default function Terms(props: any) {
 
   useEffect(() => {
     axios
-      .get(`${URL}/question`)
+      .get(`http://localhost:3002/api/question`)
       .then((response) => {
         const data = response.data;
         console.log(data);
@@ -23,7 +24,7 @@ export default function Terms(props: any) {
       });
 
     axios
-      .get(`${URL}/like`)
+      .get(`http://localhost:3002/api/like`)
       .then((response) => {
         const data = response.data;
         console.log(data);
@@ -39,7 +40,10 @@ export default function Terms(props: any) {
       const confirmed = window.prompt("유희왕이십니까?");
       if (confirmed === process.env.NEXT_PUBLIC_PASSWORD) {
         const answer = window.prompt("답변을 적어주세요.");
-        const response = await axios.post(`${URL}/question/${id}`, { answer });
+        const response = await axios.post(
+          `http://localhost:3002/api/question/${id}`,
+          { answer }
+        );
         console.log(response.data);
         window.location.replace("/");
       } else {
@@ -53,14 +57,16 @@ export default function Terms(props: any) {
   const deleteQuestion = async (id: any) => {
     try {
       const confirmed = window.confirm("정말로 삭제하시겠습니까?");
+      console.log(confirmed);
+
       if (confirmed) {
-        await axios.delete(`${URL}/deleteUser`);
+        await axios.delete(`http://localhost:3002/api/question/${id}`);
         props.setQuestion((prevquestion: any) =>
           prevquestion.filter((proque: any) => proque._id !== id)
         );
-        window.alert("삭제되었습니다.");
+        toast.success("삭제되었습니다. ");
       } else {
-        window.alert("삭제되지 않았습니다.");
+        toast.error("삭제되지 않았습니다. ");
       }
     } catch (error: any) {
       console.error("Error deleting data:", error);

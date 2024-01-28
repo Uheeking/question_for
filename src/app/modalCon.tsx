@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import Modal from "react-modal";
 import { Button, Form, Input } from "antd";
@@ -11,7 +11,7 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
-const customModalStyles: ReactModal.Styles = {
+const customModalStyles = {
   overlay: {
     backgroundColor: " rgba(0, 0, 0, 0.4)",
     width: "100%",
@@ -50,36 +50,35 @@ const ModalCon = (props: any) => {
     setName("익명");
     setText("잘 보고 있어요!!");
   };
-  const handleAddQuestion = async () => {
-    console.log(name, text, password);
+  const handleAddQuestion = async (name: any, text: any, password: any) => {
+    const { setQuestion, setModalIsOpen } = props;
 
     if (name) {
-      console.log(name, text, password);
       try {
         const response = await axios.post(
-          "http://localhost:3001/api/question",
+          "http://localhost:3002/api/question",
           {
-            name: name,
-            text: text,
-            password: password,
+            name,
+            text,
+            password,
           }
         );
 
-        if (response.status === 200) {
-          props.setQuestion([...props.question, response.data]);
-          console.log(props.question);
-
+        if (response.status === 201) {
+          setQuestion([...props.question, response.data]);
           setName("");
           setText("");
           setPassword("");
-          props.setModalIsOpen(false);
+          setModalIsOpen(false);
+          window.location.replace("/");
         }
       } catch (error: any) {
-        console.error("Error adding a To-Do item:", error);
-        window.prompt("추가 실패: " + error.message);
+        console.error("Error adding a question:", error);
+        alert("추가 실패: " + error.message);
       }
     }
   };
+
   return (
     <Modal
       ariaHideApp={false}
@@ -136,7 +135,7 @@ const ModalCon = (props: any) => {
         <Form.Item {...tailLayout}>
           <Button
             htmlType="submit"
-            onClick={handleAddQuestion}
+            onClick={() => handleAddQuestion(name, text, password)}
             className="bg-blue-300 text-white"
           >
             Submit

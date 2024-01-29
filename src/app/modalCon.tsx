@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Modal from "react-modal";
 import { Button, Form, Input } from "antd";
+const BACKURL = process.env.NEXT_PUBLIC_BACKURL;
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
@@ -55,14 +56,11 @@ const ModalCon = (props: any) => {
 
     if (name) {
       try {
-        const response = await axios.post(
-          "http://localhost:3002/api/question",
-          {
-            name,
-            text,
-            password,
-          }
-        );
+        const response = await axios.post(`${BACKURL}/question`, {
+          name,
+          text,
+          password,
+        });
 
         if (response.status === 201) {
           setQuestion([...props.question, response.data]);

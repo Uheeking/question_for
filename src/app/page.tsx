@@ -9,6 +9,7 @@ import toast, { Toaster } from "react-hot-toast";
 import ScrollToTop from "./ScrollToTop";
 import Link from "next/link";
 require("dotenv").config();
+const BACKURL = process.env.NEXT_PUBLIC_BACKURL;
 
 export default function Home() {
   if (typeof window !== "undefined") {
@@ -22,9 +23,7 @@ export default function Home() {
       console.log(id);
 
       try {
-        const response = await axios.get(
-          `http://localhost:3002/api/oauth/deleteUser/${id}`
-        );
+        const response = await axios.get(`${BACKURL}/oauth/deleteUser/${id}`);
         if (response.data.message) {
           toast.success("로그아웃이 되었습니다. ");
           localStorage.removeItem("id");
@@ -38,11 +37,8 @@ export default function Home() {
       }
     };
     useEffect(() => {
-      const urlParams = url.searchParams;
-      const id = urlParams.get("id");
-
       axios
-        .get(`http://localhost:3002/api/oauth/findUser/${id}`)
+        .get(`${BACKURL}/oauth/findUser/${id}`)
         .then((response) => {
           const data = response.data;
           localStorage.setItem("id", data[0].name);

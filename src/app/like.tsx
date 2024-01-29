@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import clsx from "clsx";
 import axios from "axios";
 require("dotenv").config();
-const URL = process.env.NEXT_PUBLIC_BACKURL;
+const BACKURL = process.env.NEXT_PUBLIC_BACKURL;
 
 function like(props: any) {
   const FILLED_HEART =
@@ -17,16 +17,16 @@ function like(props: any) {
     try {
       console.log("토글 돌아가는 중");
       console.log(isLiked, runningFetchCount);
-      setOptimisticIsLiked((optimisticIsLiked: any) => !optimisticIsLiked); 
-      setRunningFetchCount((runningFetchCount) => runningFetchCount + 1); 
-      const response = await axios.post(`${URL}/like/${id}`, {
+      setOptimisticIsLiked((optimisticIsLiked: any) => !optimisticIsLiked);
+      setRunningFetchCount((runningFetchCount) => runningFetchCount + 1);
+      const response = await axios.post(`${BACKURL}/like/${id}`, {
         isLiked: !isLiked,
       });
       if (response.data) {
         console.log(response.data);
       }
       setIsLiked(!isLiked);
-      setRunningFetchCount((runningFetchCount) => runningFetchCount - 1); 
+      setRunningFetchCount((runningFetchCount) => runningFetchCount - 1);
     } catch (error: any) {
       console.error("Error creating data:", error);
     }
@@ -37,7 +37,7 @@ function like(props: any) {
       setOptimisticIsLiked(isLiked);
     }
   }, [runningFetchCount, isLiked]);
-  
+
   return (
     <div>
       <button

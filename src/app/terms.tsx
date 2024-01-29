@@ -5,7 +5,7 @@ import Like from "./like";
 import toast from "react-hot-toast";
 import { VariableSizeList as List } from "react-window";
 require("dotenv").config();
-const URL = process.env.NEXT_PUBLIC_BACKURL;
+const BACKURL = process.env.NEXT_PUBLIC_BACKURL;
 
 export default function Terms(props: any) {
   const proque = props.question;
@@ -13,7 +13,7 @@ export default function Terms(props: any) {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3002/api/question`)
+      .get(`${BACKURL}/question`)
       .then((response) => {
         const data = response.data;
         console.log(data);
@@ -24,7 +24,7 @@ export default function Terms(props: any) {
       });
 
     axios
-      .get(`http://localhost:3002/api/like`)
+      .get(`${BACKURL}/like`)
       .then((response) => {
         const data = response.data;
         console.log(data);
@@ -40,10 +40,9 @@ export default function Terms(props: any) {
       const confirmed = window.prompt("유희왕이십니까?");
       if (confirmed === process.env.NEXT_PUBLIC_PASSWORD) {
         const answer = window.prompt("답변을 적어주세요.");
-        const response = await axios.patch(
-          `http://localhost:3002/api/question/${id}`,
-          { answer }
-        );
+        const response = await axios.patch(`${BACKURL}/question/${id}`, {
+          answer,
+        });
         console.log(response.data);
         window.location.replace("/");
       } else {
@@ -60,7 +59,7 @@ export default function Terms(props: any) {
       console.log(confirmed);
 
       if (confirmed) {
-        await axios.delete(`http://localhost:3002/api/question/${id}`);
+        await axios.delete(`${BACKURL}/question/${id}`);
         props.setQuestion((prevquestion: any) =>
           prevquestion.filter((proque: any) => proque._id !== id)
         );

@@ -27,18 +27,6 @@ router.get("/question", async (req, res) => {
   }
 });
 
-router.get("/question/:id", async (req, res) => {
-  //  #swagger.tags = ['Question API']
-  //  #swagger.summary = 'id별 질문 가져오기'
-  //  #swagger.description = 'id별 Uheeking에 대한 질문을 가져옵니다.
-  try {
-    const question = await QuestionItem.findOne();
-    res.json(question);
-  } catch (err) {
-    res.status(500).json({ error: "Could not retrieve question." });
-  }
-});
-
 router.patch("/question/:id", async (req, res) => {
   //  #swagger.tags = ['Question API']
   //  #swagger.summary = 'id별 질문 답변 등록하기'

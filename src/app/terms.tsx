@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Like from "./like";
 import toast from "react-hot-toast";
-import { FixedSizeList as List } from "react-window";
+import { VariableSizeList as List } from "react-window";
 require("dotenv").config();
 const URL = process.env.NEXT_PUBLIC_BACKURL;
 
@@ -73,14 +73,24 @@ export default function Terms(props: any) {
     }
   };
 
+  const getItemSize = (index) => {
+    const hasAnswer = proque[index].answer;
+    return hasAnswer ? 300 : 250;
+  };
+
   return (
-    <div className="w-3/5 h-190vh m-auto">
-      <List height={1500} itemCount={proque.length} itemSize={250} width="100%">
+    <div className="w-1/2 h-190vh m-auto flex">
+      <List
+        height={1500}
+        itemCount={proque.length}
+        itemSize={(index) => getItemSize(index)}
+        width="80vw"
+      >
         {({ index, style }) => {
           const currentQuestion = proque[index];
 
           return (
-            <div style={style}>
+            <div style={{ ...style, margin: "auto" }}>
               <aside className="m-auto bg-black text-white p-6 mt-5 rounded-lg w-full max-w-lg font-mono text-xl">
                 <div className="flex justify-between items-center">
                   <div className="flex space-x-2 text-red-500">

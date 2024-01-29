@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useReducer } from "react";
+import React, { useState, useReducer, useEffect } from "react";
 import ModalCon from "./modalCon";
 import Terms from "./terms";
 import axios from "axios";
@@ -32,6 +32,21 @@ export default function Home() {
         toast.error("로그아웃이 되지 않았습니다. ");
       }
     };
+    useEffect(() => {
+      const url = new URL(window.location.href);
+      const urlParams = url.searchParams;
+      const id = urlParams.get("id");
+
+      axios
+        .get(`http://localhost:3001/api/oauth/findUser/${id}`)
+        .then((response) => {
+          const data = response.data;
+          localStorage.setItem("id", data[0].name);
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+        });
+    }, []);
 
     return (
       <div>

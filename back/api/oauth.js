@@ -26,7 +26,7 @@ const axiosInstance = axios.create({
   },
 });
 
-router.get("/oauth/callback/kakao", async (req, res) => {
+router.get("/callback/kakao", async (req, res) => {
   //  #swagger.tags = ['Oauth API']
   //  #swagger.summary = 'Kakao API 등록하기'
   //  #swagger.description = 'kakao에 로그인하기입니다. '
@@ -70,10 +70,26 @@ router.get("/oauth/callback/kakao", async (req, res) => {
       name: nickname,
     };
 
-    return res.redirect("http://localhost:3000/?id=" + nickname);
+    return res.redirect("http://localhost:3000/?id=" + id);
   } catch (error) {
     console.error("Error in Kakao OAuth callback:", error.message);
     res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+router.get("/findUser/:id", async (req, res) => {
+  //  #swagger.tags = ['Oauth API']
+  //  #swagger.summary = 'user 정보찾기'
+  //  #swagger.description = 'User 테이블에 등록된 정보를 봅니다. '
+  const { id } = req.params;
+  try {
+    const existingUser = await UserItem.find({ _id: id });
+    if (!existingUser) {
+      res.json({ message: "User is not exist." });
+    }
+    res.json(existingUser);
+  } catch (error) {
+    res.status(500).json({ error: "Could not find the user." });
   }
 });
 

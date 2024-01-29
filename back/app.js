@@ -28,7 +28,9 @@ app.set("port", process.env.PORT || 3000);
 app.get("/", (req, res) => {
   res.send("Hello, Express");
 });
-app.use("/api", require("./api/question"));
+app.use("/api/question", require("./api/question"));
+app.use("/api/like", require("./api/like"));
+app.use("/api/oauth", require("./api/oauth"));
 app.use(
   "/api-docs",
   swaggerUi.serve,

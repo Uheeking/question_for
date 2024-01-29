@@ -40,7 +40,7 @@ export default function Terms(props: any) {
       const confirmed = window.prompt("유희왕이십니까?");
       if (confirmed === process.env.NEXT_PUBLIC_PASSWORD) {
         const answer = window.prompt("답변을 적어주세요.");
-        const response = await axios.post(
+        const response = await axios.patch(
           `http://localhost:3002/api/question/${id}`,
           { answer }
         );

@@ -93,7 +93,7 @@ router.get("/findUser/:id", async (req, res) => {
   }
 });
 
-router.get("/deleteUser", async (req, res) => {
+router.get("/deleteUser/:id", async (req, res) => {
   //  #swagger.tags = ['Oauth API']
   //  #swagger.summary = 'kakao 유저 삭제하기'
   //  #swagger.description = 'kakao로 로그인을 한 유저를 삭제합니다. '

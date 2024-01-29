@@ -12,13 +12,18 @@ require("dotenv").config();
 
 export default function Home() {
   if (typeof window !== "undefined") {
-    const Id = localStorage.getItem("id");
+    const nickname = localStorage.getItem("id");
+    const url = new URL(window.location.href);
+    const urlParams = url.searchParams;
+    const id = urlParams.get("id");
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [question, setQuestion] = useState([]);
-    const deleteUser = async () => {
+    const deleteUser = async (id: any) => {
+      console.log(id);
+
       try {
         const response = await axios.get(
-          "http://localhost:3001/api/deleteUser"
+          `http://localhost:3002/api/oauth/deleteUser/${id}`
         );
         if (response.data.message) {
           toast.success("로그아웃이 되었습니다. ");
@@ -28,17 +33,16 @@ export default function Home() {
           }, 1000);
         }
       } catch (error: any) {
-        console.error("Error adding a To-Do item:", error);
+        console.error("Error adding a deleted user:", error);
         toast.error("로그아웃이 되지 않았습니다. ");
       }
     };
     useEffect(() => {
-      const url = new URL(window.location.href);
       const urlParams = url.searchParams;
       const id = urlParams.get("id");
 
       axios
-        .get(`http://localhost:3001/api/oauth/findUser/${id}`)
+        .get(`http://localhost:3002/api/oauth/findUser/${id}`)
         .then((response) => {
           const data = response.data;
           localStorage.setItem("id", data[0].name);
@@ -46,7 +50,7 @@ export default function Home() {
         .catch((error) => {
           console.error("Error fetching data:", error);
         });
-    }, []);
+    }, [url]);
 
     return (
       <div>
@@ -55,13 +59,13 @@ export default function Home() {
           <div className="font-bold text-4xl text-brown-900 dark:text-slate-300 tracking-tighter pl-[20px] pt-[20px]">
             Uheeking
           </div>
-          {Id ? (
+          {nickname ? (
             <div className="flex">
               <div className="font-bold text-2xl pt-[25px] pr-[10px]">
-                {Id}님
+                {nickname}님
               </div>
               <button
-                onClick={deleteUser}
+                onClick={() => deleteUser(id)}
                 className="mt-[20px] mr-[20px] bg-green-400 text-white rounded-md p-[10px]"
               >
                 로그아웃

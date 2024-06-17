@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import axios from "axios";
 import Modal from "react-modal";
 import { Button, Form, Input } from "antd";
+import { CSSProperties } from "react";
+
 const BACKURL = process.env.NEXT_PUBLIC_BACKURL;
+
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
@@ -12,29 +15,23 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
-const customModalStyles = {
+const customModalStyles: Modal.Styles = {
   overlay: {
-    backgroundColor: " rgba(0, 0, 0, 0.4)",
-    width: "100%",
-    height: "100vh",
+    backgroundColor: "rgba(0, 0, 0, 0.4)",
     zIndex: "10",
-    position: "fixed",
-    top: "0",
-    left: "0",
   },
   content: {
     width: "400px",
     height: "360px",
-    zIndex: "150",
-    position: "absolute",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
     borderRadius: "10px",
     boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.25)",
     backgroundColor: "white",
-    justifyContent: "center",
     overflow: "auto",
+    padding: "20px",
+    position: "absolute", // Ensure position is correctly typed
   },
 };
 
@@ -43,15 +40,22 @@ const ModalCon = (props: any) => {
   const [name, setName] = useState("");
   const [text, setText] = useState("");
   const [password, setPassword] = useState("");
+
   const onReset = () => {
     form.resetFields();
   };
+
   const onFill = () => {
     form.setFieldsValue({ name: "익명", text: "잘 보고 있어요!!" });
     setName("익명");
     setText("잘 보고 있어요!!");
   };
-  const handleAddQuestion = async (name: any, text: any, password: any) => {
+
+  const handleAddQuestion = async (
+    name: string,
+    text: string,
+    password: string
+  ) => {
     const { setQuestion, setModalIsOpen } = props;
 
     if (name) {
@@ -149,4 +153,5 @@ const ModalCon = (props: any) => {
     </Modal>
   );
 };
+
 export default ModalCon;

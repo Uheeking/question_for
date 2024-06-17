@@ -7,9 +7,10 @@ import html2canvas from "html2canvas";
 
 const { TextArea } = Input;
 
-const DiaryInput = ({ isLoading, onSubmit, messageApi }) => {
-  const [userInput, setUserInput] = useState("");
-  const handleUserInput = (e) => {
+const DiaryInput = ({ isLoading, onSubmit, messageApi }: any) => {
+  const [userInput, setUserInput] = useState(null);
+  const actualValue = userInput ?? "";
+  const handleUserInput = (e: any) => {
     setUserInput(e.target.value);
   };
   const handleClick = () => {
@@ -31,23 +32,28 @@ const DiaryInput = ({ isLoading, onSubmit, messageApi }) => {
 
   const captureAndDownload = async () => {
     const nodeToCapture = document.getElementById("capture");
-    html2canvas(nodeToCapture, {
-      allowTaint: true,
-      useCORS: true,
-    }).then(function (canvas) {
-      const image = canvas.toDataURL("image/png");
-      const a = document.createElement("a");
-      a.href = image;
-      a.download = "gpt-diary-result.png";
-      a.click();
-    });
+    if (nodeToCapture instanceof HTMLElement) {
+      try {
+        const canvas = await html2canvas(nodeToCapture, {
+          allowTaint: true,
+          useCORS: true,
+        });
+
+        // Proceed with canvas manipulation or download
+        console.log("Canvas captured:", canvas);
+      } catch (error) {
+        console.error("Error capturing canvas:", error);
+      }
+    } else {
+      console.warn("Element with id 'capture' not found or not an HTMLElement");
+    }
   };
 
   return (
     <div>
       <Title>내 고민</Title>
       <TextArea
-        value={userInput}
+        value={actualValue}
         onChange={handleUserInput}
         placeholder="오늘 일어난 일들을 간단히 적어주세요."
         style={{ height: "200px" }}

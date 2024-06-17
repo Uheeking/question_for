@@ -24,7 +24,7 @@ const ThumbnailImage = styled(Image)`
   margin-bottom: 15px;
 `;
 
-const DiaryDisplay = ({ data, isLoading }) => {
+const DiaryDisplay = ({ data, isLoading }: any) => {
   return (
     <DiaryContainer>
       {isLoading && (
@@ -86,7 +86,7 @@ const DiaryDisplay = ({ data, isLoading }) => {
           GPT 조언
         </CardTitle>
         <div>
-          {data.action_list.map((action, index) => (
+          {data.action_list.map((action: any, index: any) => (
             <ActionListItem key={index}>{action}</ActionListItem>
           ))}
         </div>

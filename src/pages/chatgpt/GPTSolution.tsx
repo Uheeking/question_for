@@ -17,7 +17,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
 
-  const handleClickAPICall = async (userInput) => {
+  const handleClickAPICall = async (userInput: any) => {
     try {
       setIsLoading(true);
       const message = await CallGPT({
@@ -27,7 +27,7 @@ function App() {
     } catch (error) {
       messageApi.open({
         type: "error",
-        content: error?.message,
+        content: "An error occurred",
       });
       return;
     } finally {
@@ -35,7 +35,7 @@ function App() {
     }
   };
 
-  const handleSubmit = (userInput) => {
+  const handleSubmit = (userInput: any) => {
     handleClickAPICall(userInput);
   };
 

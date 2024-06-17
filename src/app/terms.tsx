@@ -33,7 +33,7 @@ export default function Terms(props: any) {
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-  }, []);
+  }, [props]);
 
   const addAnswer = async (id: any) => {
     try {
@@ -72,7 +72,7 @@ export default function Terms(props: any) {
     }
   };
 
-  const getItemSize = (index) => {
+  const getItemSize = (index: any) => {
     const hasAnswer = proque[index].answer;
     return hasAnswer ? 300 : 250;
   };

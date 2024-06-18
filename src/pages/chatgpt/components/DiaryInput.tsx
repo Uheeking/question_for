@@ -1,18 +1,24 @@
 import { Input, Button } from "antd";
 import { useState } from "react";
-import { Title } from "./CommonStyles";
+// import { Title } from "./CommonStyles";
 import styled from "styled-components";
 import { FileImageOutlined } from "@ant-design/icons";
 import html2canvas from "html2canvas";
 
 const { TextArea } = Input;
 
+
 const DiaryInput = ({ isLoading, onSubmit, messageApi }: any) => {
+  
   const [userInput, setUserInput] = useState(null);
   const actualValue = userInput ?? "";
   const handleUserInput = (e: any) => {
     setUserInput(e.target.value);
   };
+  const Title = styled.div`
+  font-size: 20px;
+  margin: 10px;
+`;
   const handleClick = () => {
     if (!userInput) {
       messageApi.open({

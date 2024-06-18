@@ -1,13 +1,4 @@
 import {
-  DiaryContainer,
-  ResultTitle,
-  Divider,
-  CardContainer,
-  CardTitle,
-  ActionListItem,
-} from "./CommonStyles";
-
-import {
   LoadingOutlined,
   CheckCircleTwoTone,
   HeartTwoTone,
@@ -17,11 +8,45 @@ import {
 } from "@ant-design/icons";
 import { Image } from "antd";
 import styled from "styled-components";
+const CardContainer = styled.div`
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  padding: 20px;
+  border-radius: 2px;
+  margin: 10px 0px;
+`;
+const CardTitle = styled.div`
+  margin: 6px;
+  color: #6b6b6b;
+  font-size: 22px;
+  margin-bottom: 20px;
+`;
+const DiaryContainer = styled.div`
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+`;
+const ActionList = styled.ul`
+  font-size: 16px;
+`;
+
+const ActionListItem = styled.li`
+  margin-bottom: 5px;
+`;
 
 const ThumbnailImage = styled(Image)`
   max-width: 100%;
   border-radius: 8px;
   margin-bottom: 15px;
+`;
+
+const Divider = styled.div`
+  margin-top: 20px;
+`;
+
+const ResultTitle = styled.div`
+  font-size: 35px;
+  margin: 10px;
 `;
 
 const DiaryDisplay = ({ data, isLoading }: any) => {

@@ -8,7 +8,7 @@ import  CallGPT  from './api/gpt'; // Adjust the path based on your file structu
 
 const dummyData = {
   title: '개발 고민과 해결',
-  thumbnail: 'https://source.unsplash.com/1600x900/?coding',
+  // thumbnail: 'https://source.unsplash.com/1600x900/?coding',
   summary: '코딩 강의를 듣고 프로젝트에 버그가 발생했지만 해결하지 못하여 GPT를 통해 문제를 해결했음',
   emotional_content: '오늘 코딩 강의를 들었는데, 프로젝트에 버그가 많이 나왔어. ...',
   emotional_result: '이번 상황을 통해 내가 프로그래밍에 대해 더 배울 필요가 있음을 느꼈다. ...',

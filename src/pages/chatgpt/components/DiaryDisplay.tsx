@@ -71,7 +71,7 @@ const DiaryDisplay = ({ data, isLoading }: any) => {
         <div>{data?.summary}</div>
       </CardContainer>
 
-      <ThumbnailImage src={data?.thumbnail} alt="Thumbnail" />
+      {/* <ThumbnailImage src={data?.thumbnail} alt="Thumbnail" /> */}
 
       <Divider />
       <CardContainer>

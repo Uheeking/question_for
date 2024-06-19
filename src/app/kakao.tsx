@@ -12,9 +12,9 @@ function kakao() {
         {/* <button onClick={browserPreventEvent()}>
           <Image src={KakaoImage} alt="kakao" placeholder="blur" />
         </button> */}
-        <Link href={kakaoAuthUrl}>
+        {/* <Link href={kakaoAuthUrl}>
           <Image src={KakaoImage} alt="kakao" placeholder="blur" />
-        </Link>
+        </Link> */}
       </div>
     </div>
   );

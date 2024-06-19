@@ -1,3 +1,4 @@
+
 import {
   LoadingOutlined,
   CheckCircleTwoTone,
@@ -8,48 +9,46 @@ import {
 } from "@ant-design/icons";
 import { Image } from "antd";
 import styled from "styled-components";
-const CardContainer = styled.div`
+const DiaryDisplay = ({ data, isLoading }: any) => {
+  const CardContainer = styled.div`
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   padding: 20px;
   border-radius: 2px;
   margin: 10px 0px;
 `;
-const CardTitle = styled.div`
+  const CardTitle = styled.div`
   margin: 6px;
   color: #6b6b6b;
   font-size: 22px;
   margin-bottom: 20px;
 `;
-const DiaryContainer = styled.div`
+  const DiaryContainer = styled.div`
   padding: 20px;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
 `;
-const ActionList = styled.ul`
-  font-size: 16px;
-`;
 
-const ActionListItem = styled.li`
+  const ActionListItem = styled.li`
   margin-bottom: 5px;
 `;
 
-const ThumbnailImage = styled(Image)`
+  const ThumbnailImage = styled(Image)`
   max-width: 100%;
   border-radius: 8px;
   margin-bottom: 15px;
 `;
 
-const Divider = styled.div`
+  const Divider = styled.div`
   margin-top: 20px;
 `;
 
-const ResultTitle = styled.div`
+  const ResultTitle = styled.div`
   font-size: 35px;
   margin: 10px;
 `;
 
-const DiaryDisplay = ({ data, isLoading }: any) => {
+
   return (
     <DiaryContainer>
       {isLoading && (
@@ -58,7 +57,7 @@ const DiaryDisplay = ({ data, isLoading }: any) => {
           <LoadingOutlined />
         </>
       )}
-      <ResultTitle>{data.title}</ResultTitle>
+      <ResultTitle>{data?.title}</ResultTitle>
 
       <Divider />
       <CardContainer>
@@ -69,10 +68,10 @@ const DiaryDisplay = ({ data, isLoading }: any) => {
           />
           요약
         </CardTitle>
-        <div>{data.summary}</div>
+        <div>{data?.summary}</div>
       </CardContainer>
 
-      <ThumbnailImage src={data.thumbnail} alt="Thumbnail" />
+      <ThumbnailImage src={data?.thumbnail} alt="Thumbnail" />
 
       <Divider />
       <CardContainer>
@@ -80,7 +79,7 @@ const DiaryDisplay = ({ data, isLoading }: any) => {
           <HeartTwoTone twoToneColor="#FFB7B2" style={{ marginRight: "6px" }} />
           감정일기장
         </CardTitle>
-        <div>{data.emotional_content}</div>
+        <div>{data?.emotional_content}</div>
       </CardContainer>
 
       <Divider />
@@ -89,7 +88,7 @@ const DiaryDisplay = ({ data, isLoading }: any) => {
           <SmileTwoTone twoToneColor="#FFDAC1" style={{ marginRight: "6px" }} />
           내가 느낀 감정
         </CardTitle>
-        <div>{data.emotional_result}</div>
+        <div>{data?.emotional_result}</div>
       </CardContainer>
 
       <Divider />
@@ -101,7 +100,7 @@ const DiaryDisplay = ({ data, isLoading }: any) => {
           />
           심리 분석
         </CardTitle>
-        <div>{data.analysis}</div>
+        <div>{data?.analysis}</div>
       </CardContainer>
 
       <Divider />
@@ -111,9 +110,7 @@ const DiaryDisplay = ({ data, isLoading }: any) => {
           GPT 조언
         </CardTitle>
         <div>
-          {data.action_list.map((action: any, index: any) => (
-            <ActionListItem key={index}>{action}</ActionListItem>
-          ))}
+            <ActionListItem>{data?.action_list}</ActionListItem>
         </div>
       </CardContainer>
     </DiaryContainer>

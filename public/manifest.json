@@ -4,9 +4,9 @@
     "display": "fullscreen",
     "scope": "/",
     "start_url": "/",
-    "name": "\uc720\ud76c\uc655\ubb34\ubb3c",
-    "short_name": "\uc720\ud76c\uc655\ubb34\ubb3c",
-    "description": "\uc720\ud76c\uc655\uc5d0\uac8c \ubb34\uc5c7\uc774\ub4e0\uc9c0 \ubb3c\uc5b4\ubcf4\uc138\uc694!",
+    "name": "유희왕무물",
+    "short_name": "유희왕무물",
+    "description": "유희왕에게 뭐든지 물어보세요!",
     "icons": [
         {
             "src": "/icon-192x192.png",

@@ -1,16 +1,31 @@
-const prod = process.env.NODE_ENV === "production";
-const runtimeCaching = require("next-pwa/cache");
-const withPWA = require("next-pwa")({
-  dest: "public",
+const withPlugins = require("next-compose-plugins");
+const withPWA = require('next-pwa')({
+  dest: 'public',
   register: true,
   skipWaiting: true,
-  runtimeCaching,
-  disable: prod ? false : true,
 });
 
-const nextConfig = withPWA({
-  eslint: {
-    ignoreDuringBuilds: true
-  }
-});
-module.exports = nextConfig;
+const nextConfig = {
+	reactStrictMode: true,
+};
+module.exports = withPlugins(
+	[
+		[
+			withPWA,
+			{
+				pwa: {
+					dest: "public",
+				},
+			},
+		],
+        [
+            {
+                typescriptLoaderOptions: {
+                    transpileOnly: false,
+                },
+            }
+        ],
+        // ...
+	],
+	nextConfig
+);

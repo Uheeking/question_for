@@ -1,5 +1,3 @@
-// pages/chatgpt/api/gpt.js
-
 import React, { useEffect, useState } from 'react';
 
 const CallGPT = ({ promptApiEndpoint }) => {

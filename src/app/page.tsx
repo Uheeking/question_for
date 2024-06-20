@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import "./firebase-messaging-sw.js";
 import ModalCon from "./modalCon";
 import Terms from "./terms";
 import axios from "axios";

@@ -5,16 +5,18 @@ require("dotenv").config();
 import KakaoImage from "../../public/kakao_login_medium_narrow.png";
 
 function kakao() {
-  const kakaoAuthUrl = process.env.NEXT_PUBLIC_KAKAO_AUTH_URL as string;
+  const kakaoAuthUrl = process.env.NEXT_PUBLIC_KAKAO_AUTH_URL || 'https://question-for.vercel.app/';
   return (
     <div>
       <div className="font-bold text-4xl p-[20px]">
         {/* <button onClick={browserPreventEvent()}>
           <Image src={KakaoImage} alt="kakao" placeholder="blur" />
         </button> */}
-        {/* <Link href={kakaoAuthUrl}>
+        
+        
+        <Link href={kakaoAuthUrl}>
           <Image src={KakaoImage} alt="kakao" placeholder="blur" />
-        </Link> */}
+        </Link>
       </div>
     </div>
   );

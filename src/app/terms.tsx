@@ -75,21 +75,23 @@ export default function Terms(props: any) {
 
   const getItemSize = (index: any) => {
     const hasAnswer = proque[index].answer;
-
+    if (typeof window !== "undefined") {
       if (window.innerWidth < 768) {
         return hasAnswer ? 250 : 200; // Mobile size
       } else {
         return hasAnswer ? 250 : 200; // Desktop size
       }
+    }
+    return 250;
   };
 
   return (
     <div className="w-full md:w-1/2 h-auto md:h-190vh m-auto flex responsive-container">
       <List
-       height={window.innerWidth  < 768 ? 1000 : 1500}
+       height={typeof window !== "undefined" && window.innerWidth < 768 ? 1000 : 1500}
         itemCount={proque.length}
         itemSize={(index) => getItemSize(index)}
-        width={window.innerWidth  < 768 ? "100vw" : "80vw"} // Use 100vw for full width on mobile
+        width={typeof window !== "undefined" && window.innerWidth < 768 ? "100vw" : "80vw"} // Use 100vw for full width on mobile
       >
         {({ index, style }) => {
           const currentQuestion = proque[index];

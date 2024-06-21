@@ -88,6 +88,7 @@ export default function Home() {
       <div className="justify-center w-[200px] m-auto">
         <div className="w-full flex-col">
           <Image
+          priority
             src="/profile.png"
             className="bg-white m-auto object-cover inset-0 rounded-full h-[130px] w-[130px]"
             width={100}

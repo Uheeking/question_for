@@ -1,7 +1,16 @@
 import { initializeApp } from "firebase/app";
 import { getMessaging, getToken, onMessage } from "firebase/messaging"; 
+require("dotenv").config();
 
-
+// Your Firebase configuration
+const firebaseConfig = {
+  apiKey: process.env.NEXT_PUBLIC_APP_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_APP_AUTHDOMAIN,
+  projectId: process.env.NEXT_PUBLIC_APP_PROJECTID,
+  storageBucket: process.env.NEXT_PUBLIC_APP_STORAGEBUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_APP_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_APP_APP_ID
+};
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -25,7 +34,7 @@ if (typeof window !== "undefined" && typeof window.navigator !== "undefined") {
     // Get the FCM token
     try {
       const token = await getToken(messaging, {
-        vapidKey: 
+        vapidKey: process.env.NEXT_PUBLIC_APP_VAPID_KEY,
       });
 
       if (token) {

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import Modal from "react-modal";
 import { Button, Form, Input } from "antd";
-import { CSSProperties } from "react";
 
 const BACKURL = process.env.NEXT_PUBLIC_BACKURL;
 

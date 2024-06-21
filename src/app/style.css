@@ -1,0 +1,15 @@
+/* styles.css */
+@media (max-width: 767px) {
+    .responsive-container {
+      width: 90% !important;
+      height: auto !important;
+    }
+    .responsive-aside {
+      padding: 1rem !important;
+      margin-top: 0.5rem !important;
+    }
+    .responsive-text {
+      font-size: 1rem !important;
+    }
+  }
+  

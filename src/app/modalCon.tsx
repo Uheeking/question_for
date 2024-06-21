@@ -64,13 +64,10 @@ const ModalCon = (props: any) => {
           text,
           password,
         });
-
-        if (response.status === 201) {
+        console.log(response);
+        
+        if (response.status === 200 || response.status === 201)  {
           setQuestion([...props.question, response.data]);
-          setName("");
-          setText("");
-          setPassword("");
-          setModalIsOpen(false);
           window.location.replace("/");
         }
       } catch (error: any) {

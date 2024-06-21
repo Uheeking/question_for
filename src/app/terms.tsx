@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import "./style.css";
 import axios from "axios";
 import Like from "./like";
 import toast from "react-hot-toast";
@@ -33,7 +34,7 @@ export default function Terms(props: any) {
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-  }, [props]);
+  }, []);
 
   const addAnswer = async (id: any) => {
     try {
@@ -74,23 +75,28 @@ export default function Terms(props: any) {
 
   const getItemSize = (index: any) => {
     const hasAnswer = proque[index].answer;
-    return hasAnswer ? 300 : 250;
+
+      if (window.innerWidth < 768) {
+        return hasAnswer ? 250 : 200; // Mobile size
+      } else {
+        return hasAnswer ? 250 : 200; // Desktop size
+      }
   };
 
   return (
-    <div className="w-1/2 h-190vh m-auto flex">
+    <div className="w-full md:w-1/2 h-auto md:h-190vh m-auto flex responsive-container">
       <List
-        height={1500}
+       height={window.innerWidth  < 768 ? 1000 : 1500}
         itemCount={proque.length}
         itemSize={(index) => getItemSize(index)}
-        width="80vw"
+        width={window.innerWidth  < 768 ? "100vw" : "80vw"} // Use 100vw for full width on mobile
       >
         {({ index, style }) => {
           const currentQuestion = proque[index];
-
+  
           return (
-            <div style={{ ...style, margin: "auto" }}>
-              <aside className="m-auto bg-black text-white p-6 mt-5 rounded-lg w-full max-w-lg font-mono text-xl">
+            <div style={{ ...style }}>
+              <aside className="m-auto bg-black text-white p-4 md:p-6 mt-2 md:mt-5 rounded-lg w-full max-w-lg font-mono text-lg md:text-xl responsive-aside">
                 <div className="flex justify-between items-center">
                   <div className="flex space-x-2 text-red-500">
                     <button>
@@ -109,7 +115,7 @@ export default function Terms(props: any) {
                       id={currentQuestion._id}
                     />
                   </div>
-                  <p className="text-sm">bash</p>
+                  <p className="text-xs md:text-sm responsive-text">bash</p>
                 </div>
                 <div className="mt-2">
                   <div className="flex">

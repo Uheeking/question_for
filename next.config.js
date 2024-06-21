@@ -1,3 +1,4 @@
+require("dotenv").config();
 const withPlugins = require("next-compose-plugins");
 const withPWA = require('next-pwa')({
   dest: 'public',

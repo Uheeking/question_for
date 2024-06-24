@@ -61,5 +61,5 @@
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
   },
-  "proxy": "http://localhost:3001"
+  "proxy": "https://new-express-project-smoky.vercel.app/"
 }

@@ -1,7 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getMessaging, getToken, onMessage } from "firebase/messaging"; 
 require("dotenv").config();
-console.log(process.env.NEXT_PUBLIC_APP_PROJECTID);
 // Your Firebase configuration
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_APP_API_KEY,

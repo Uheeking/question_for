@@ -59,7 +59,7 @@ const ModalCon = (props: any) => {
 
     if (name) {
       try {
-        const response = await axios.post(`/question`, {
+        const response = await axios.post(`${BACKURL}/question`, {
           name,
           text,
           password,

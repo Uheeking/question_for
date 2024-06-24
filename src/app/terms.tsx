@@ -14,7 +14,7 @@ export default function Terms(props: any) {
 
   useEffect(() => {
     axios
-      .get(`${BACKURL}/question`)
+      .get(`/question`)
       .then((response) => {
         const data = response.data;
         console.log(data);
@@ -25,7 +25,7 @@ export default function Terms(props: any) {
       });
 
     axios
-      .get(`${BACKURL}/like`)
+      .get(`/like`)
       .then((response) => {
         const data = response.data;
         console.log(data);

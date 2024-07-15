@@ -60,6 +60,5 @@
     "postcss": "^8",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
-  },
-  "proxy": "https://new-express-project-smoky.vercel.app/"
+  }
 }

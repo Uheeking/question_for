@@ -1,8 +1,20 @@
 {
     "rewrites": [
         {
+            "source": "/like/(.*)",
+            "destination": "https://new-express-project-smoky.vercel.app/like/$1"
+        },
+        {
+            "source": "/question/(.*)",
+            "destination": "https://new-express-project-smoky.vercel.app/question/$1"
+        },
+        {
             "source": "/(.*)",
-            "destination": "https://new-express-project-smoky.vercel.app"
+            "destination": "https://new-express-project-smoky.vercel.app/$1"
+        },
+        {
+            "source": "/test/(.*)",
+            "destination": "https://new-express-project-smoky.vercel.app/test/$1"
         }
     ]
 }

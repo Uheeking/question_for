@@ -16,6 +16,8 @@ export default function Terms(props: any) {
     axios
       .get(`${BACKURL}/test`)
       .then((response) => {
+        console.log(response.text());
+        
         const data = response.data;
         console.log(data);
         // props.setQuestion(data);

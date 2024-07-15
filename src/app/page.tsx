@@ -49,9 +49,6 @@ export default function Home() {
             console.error("Error fetching data:", error);
           });
       }
-
-
-
       setNickname(localNickname || ""); // Update nickname state with local storage value
     }
   }, []);
@@ -73,7 +70,6 @@ export default function Home() {
       toast.error("로그아웃이 되지 않았습니다. ");
     }
   };
-
 
   return (
     <div>

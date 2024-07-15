@@ -24,11 +24,7 @@ export default function Home() {
     chid: '',
     chlevel: ''
   });
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
+  
   useEffect(() => {
     if (typeof window !== "undefined") {
       const localNickname = localStorage.getItem("id");

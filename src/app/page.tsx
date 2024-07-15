@@ -18,6 +18,16 @@ export default function Home() {
   const [question, setQuestion] = useState([]);
   const [nickname, setNickname] = useState("");
   const [id, setId] = useState("");
+  const [formData, setFormData] = useState({
+    prid: '',
+    prlevel: '',
+    chid: '',
+    chlevel: ''
+  });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -40,6 +50,8 @@ export default function Home() {
           });
       }
 
+
+
       setNickname(localNickname || ""); // Update nickname state with local storage value
     }
   }, []);
@@ -61,6 +73,7 @@ export default function Home() {
       toast.error("로그아웃이 되지 않았습니다. ");
     }
   };
+
 
   return (
     <div>
@@ -88,7 +101,7 @@ export default function Home() {
       <div className="justify-center w-[200px] m-auto">
         <div className="w-full flex-col">
           <Image
-          priority
+            priority
             src="/profile.png"
             className="bg-white m-auto object-cover inset-0 rounded-full h-[130px] w-[130px]"
             width={100}
@@ -106,6 +119,7 @@ export default function Home() {
             <Link href="/chatgpt/GPTSolution">ask for chat GPT</Link>
           </div>
         </div>
+
         <button
           onClick={() => setModalIsOpen(true)}
           className="flex ml-3 font-bold text-4xl text-brown-900 dark:text-slate-300 tracking-tighter p-1"

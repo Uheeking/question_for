@@ -34,6 +34,16 @@ export default function Terms(props: any) {
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
+      axios
+      .get(`${BACKURL}/question`)
+      .then((response) => {
+        const data = response.data;
+        console.log(data);
+        // props.setQuestion(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
       
     // axios
     //   .get(`${BACKURL}/question`)

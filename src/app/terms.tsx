@@ -18,7 +18,7 @@ export default function Terms(props: any) {
       .then((response) => {
         const data = response.data;
         console.log(data);
-        // props.setQuestion(data);
+        props.setQuestion(data);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);

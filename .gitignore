@@ -37,4 +37,4 @@ back/vercel.json
 next-env.d.ts
 
 .env
-back/vercel.json
+front/node_modules

@@ -1,20 +1,19 @@
 {
-    "rewrites": [
+    "version": 2,
+    "builds": [
         {
-            "source": "/like/(.*)",
-            "destination": "https://new-express-project-smoky.vercel.app/like/$1"
+            "src": "back/api/index.js",
+            "use": "@vercel/node"
         },
         {
-            "source": "/question/(.*)",
-            "destination": "https://new-express-project-smoky.vercel.app/question/$1"
-        },
-        {
-            "source": "/(.*)",
-            "destination": "https://new-express-project-smoky.vercel.app/$1"
-        },
-        {
-            "source": "/test/(.*)",
-            "destination": "https://new-express-project-smoky.vercel.app/test/$1"
+            "src": "front/package.json",
+            "use": "@vercel/next"
         }
-    ]
+    ],
+    "routes": [
+        { "src": "/(.*)", "dest": "back/api/index.js" }
+    ],
+    "env": {
+        "NODE_ENV": "production"
+    }
 }

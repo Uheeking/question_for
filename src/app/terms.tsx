@@ -13,17 +13,6 @@ export default function Terms(props: any) {
   const [like, setLike] = useState([]);
 
   useEffect(() => {
-    // axios
-    //   .get(`${BACKURL}/test`)
-    //   .then((response) => {
-        
-    //     const data = response.data;
-    //     console.log(data);
-    //     // props.setQuestion(data);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error fetching data:", error);
-    //   });
     axios
       .get(`${BACKURL}/api/question`)
       .then((response) => {
@@ -34,28 +23,17 @@ export default function Terms(props: any) {
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-      
+
     axios
-      .get(`${BACKURL}/question`)
+      .get(`${BACKURL}/api/like`)
       .then((response) => {
         const data = response.data;
         console.log(data);
-        props.setQuestion(data);
+        setLike(data);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-
-    // axios
-    //   .get(`${BACKURL}/like`)
-    //   .then((response) => {
-    //     const data = response.data;
-    //     console.log(data);
-    //     setLike(data);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error fetching data:", error);
-    //   });
   }, []);
 
   const addAnswer = async (id: any) => {
@@ -63,7 +41,7 @@ export default function Terms(props: any) {
       const confirmed = window.prompt("유희왕이십니까?");
       if (confirmed === process.env.NEXT_PUBLIC_PASSWORD) {
         const answer = window.prompt("답변을 적어주세요.");
-        const response = await axios.patch(`${BACKURL}/question/${id}`, {
+        const response = await axios.patch(`${BACKURL}/api/question/${id}`, {
           answer,
         });
         console.log(response.data);
@@ -82,7 +60,7 @@ export default function Terms(props: any) {
       console.log(confirmed);
 
       if (confirmed) {
-        await axios.delete(`${BACKURL}/question/${id}`);
+        await axios.delete(`${BACKURL}/api/question/${id}`);
         props.setQuestion((prevquestion: any) =>
           prevquestion.filter((proque: any) => proque._id !== id)
         );

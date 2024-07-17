@@ -19,7 +19,7 @@ function Like(props: any) {
       console.log(isLiked, runningFetchCount);
       setOptimisticIsLiked((optimisticIsLiked: any) => !optimisticIsLiked);
       setRunningFetchCount((runningFetchCount) => runningFetchCount + 1);
-      const response = await axios.post(`${BACKURL}/like/${id}`, {
+      const response = await axios.post(`${BACKURL}/api/like/${id}`, {
         isLiked: !isLiked,
       });
       if (response.data) {

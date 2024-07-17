@@ -26,14 +26,19 @@ export default function Terms(props: any) {
       });
     axios
       .get(`${BACKURL}`)
-      .then((response) => {
-        const data = response.data;
-        console.log(data);
-        // props.setQuestion(data);
+      .then((response: any)  => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
       })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
+      .then(data => {
+        console.log(data);
+      })
+      .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
       });
+
     axios
       .get(`${BACKURL}/question`)
       .then((response) => {

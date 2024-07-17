@@ -13,19 +13,19 @@ export default function Terms(props: any) {
   const [like, setLike] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`${BACKURL}/test`)
-      .then((response) => {
+    // axios
+    //   .get(`${BACKURL}/test`)
+    //   .then((response) => {
         
-        const data = response.data;
-        console.log(data);
-        // props.setQuestion(data);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
+    //     const data = response.data;
+    //     console.log(data);
+    //     // props.setQuestion(data);
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error fetching data:", error);
+    //   });
     axios
-      .get(`${BACKURL}/api`)
+      .get(`${BACKURL}/api/question`)
       .then((response) => {
         const data = response.data;
         console.log(data);
@@ -35,27 +35,27 @@ export default function Terms(props: any) {
         console.error("Error fetching data:", error);
       });
       
-    axios
-      .get(`${BACKURL}/question`)
-      .then((response) => {
-        const data = response.data;
-        console.log(data);
-        props.setQuestion(data);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
+    // axios
+    //   .get(`${BACKURL}/question`)
+    //   .then((response) => {
+    //     const data = response.data;
+    //     console.log(data);
+    //     props.setQuestion(data);
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error fetching data:", error);
+    //   });
 
-    axios
-      .get(`${BACKURL}/like`)
-      .then((response) => {
-        const data = response.data;
-        console.log(data);
-        setLike(data);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
+    // axios
+    //   .get(`${BACKURL}/like`)
+    //   .then((response) => {
+    //     const data = response.data;
+    //     console.log(data);
+    //     setLike(data);
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error fetching data:", error);
+    //   });
   }, []);
 
   const addAnswer = async (id: any) => {
